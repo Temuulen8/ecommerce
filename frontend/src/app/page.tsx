@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const [count, setCount] = useState<number>(5);
@@ -15,12 +17,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center">
-      <h1>welecome ecommerce app</h1>
-      <div className="flex ">
-        <Button onClick={minus}>-</Button>
-        <Label className="text-4xl mx-5">{count}</Label>
-        <Button onClick={add}>+</Button>
-      </div>
+      <Header />
+      <div>aki</div>
+      <Footer />
     </div>
   );
 }
