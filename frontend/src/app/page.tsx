@@ -1,10 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
+import SignUp from "./(auth)/signup/page";
 
 export default function Home() {
   const [count, setCount] = useState<number>(5);
@@ -16,9 +15,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="">
       <Header />
-      <div>aki</div>
+      <SignUp />
       <Footer />
     </div>
   );
