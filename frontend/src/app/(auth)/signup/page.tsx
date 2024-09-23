@@ -27,6 +27,12 @@ const SignUp = () => {
           placeholder="Нууц үг давтах "
           className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border"
         />
+        <div className="text-[#71717A] text-sm">
+          <li>Том үсэг орсон байх</li>
+          <li>Жижиг үсэг орсон байх</li>
+          <li>Тоо орсон байх</li>
+          <li>Тэмдэгт орсон байх</li>
+        </div>
         <button className="btn bg-[#0166FF] text-white rounded-[20px] w-[334px] h-[36px] ">
           Үүсгэх
         </button>
