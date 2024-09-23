@@ -2,21 +2,24 @@
 
 import { Request, Response } from "express";
 import User from "../models/user.model";
-
+import bcrypt from "bcrypt";
 export const signup = async (req: Request, res: Response) => {
   try {
-    const { name, email, password } = req.body;
+    const { firstname, lastname, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!firstname || !lastname || !email || !password) {
       res.status(400).json({ message: "Hooson utga baij bolohgui." });
     }
 
     const createdUser = await User.create({
-      name,
+      firstname,
+      lastname,
       email,
       password,
       phoneNumber: "",
     });
+
+    console.log("create user", createdUser);
 
     res.status(201).json({ message: "success", user: createdUser });
   } catch (error) {
