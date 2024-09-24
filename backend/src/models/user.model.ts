@@ -18,16 +18,15 @@ interface IUser {
 const userSchema = new Schema<IUser>({
   firstname: {
     type: String,
-    unique: true,
     required: [true, "Hereglegchiin neriig zaaval oruulna."],
   },
   lastname: {
     type: String,
-    unique: true,
     required: [true, "Hereglegchiin ovogiig zaaval oruulna."],
   },
   email: {
     type: String,
+    unique: true,
     required: [true, "Hereglegchiin email hayagiig zaaval oruulna."],
   },
   password: {

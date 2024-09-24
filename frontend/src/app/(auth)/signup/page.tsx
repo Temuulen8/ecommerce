@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const SignUp = () => {
   const router = useRouter();
@@ -22,13 +23,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8008/auth/signup`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ email, name, password }),
-      });
+      const res = await axios.post(`http://localhost:8000/api/v1/auth/signup`);
 
       if (response.status === 201) {
         toast.success("User successfully signed up", { autoClose: 1000 });
