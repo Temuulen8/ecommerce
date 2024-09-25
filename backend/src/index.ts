@@ -1,7 +1,7 @@
-import { Resend } from "resend";
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 dotenv.config();
+import { Resend } from "resend";
 import authRoute from "./routes/auth-route";
 import { connectDB } from "./config/db";
 import generateHtmlTemplate from "./utils/generateHtmlTemplate";
