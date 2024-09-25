@@ -1,6 +1,52 @@
-import React from "react";
+"use client";
+
+import axios from "axios";
+import { toast } from "react-toastify";
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const LogIn = () => {
+  const router = useRouter();
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const logIn = async () => {
+    // ES5
+    // const email = userData.email;
+    // const password = userData.password
+    // ES6 Onject destructing
+    const { email, password } = userData;
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8000/api/v1/auth/login`,
+        {
+          email,
+          password,
+        }
+      );
+
+      // const response = fetch("http://localhost:8008/auth/signin", {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify({ email, password }),
+      // });
+
+      if (response.status === 200) {
+        toast.success("User successfully signed in", { autoClose: 1000 });
+        const { token } = response.data;
+        localStorage.setItem("token", token);
+
+        router.push("/home");
+      }
+    } catch (error) {
+      console.error("There was an error signing in:", error);
+      toast.error("Failed to sign in. Please try again.");
+    }
+  };
   return (
     <div className="">
       <div className="flex flex-col items-center justify-center gap-10 h-dvh">
@@ -22,10 +68,11 @@ const LogIn = () => {
             Нэвтрэх
           </button>
           <button className="text-[#71717A] border-b-2">Нууц үг мартсан</button>
-
-          <button className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border">
-            Бүртгүүлэх
-          </button>
+          <Link href="/signup">
+            <button className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border">
+              Бүртгүүлэх
+            </button>
+          </Link>
         </div>
       </div>
     </div>
