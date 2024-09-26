@@ -14,10 +14,11 @@ const LogIn = () => {
   });
 
   const logIn = async () => {
+    console.log("one");
     // ES5
     // const email = userData.email;
     // const password = userData.password
-    // ES6 Onject destructing
+    // ES6 Object destructing
     const { email, password } = userData;
 
     try {
@@ -28,12 +29,6 @@ const LogIn = () => {
           password,
         }
       );
-
-      // const response = fetch("http://localhost:8008/auth/signin", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({ email, password }),
-      // });
 
       if (response.status === 200) {
         toast.success("User successfully signed in", { autoClose: 1000 });
@@ -46,6 +41,7 @@ const LogIn = () => {
       console.error("There was an error signing in:", error);
       toast.error("Failed to sign in. Please try again.");
     }
+    console.log("two");
   };
   return (
     <div className="">
@@ -64,9 +60,14 @@ const LogIn = () => {
             placeholder="Нууц үг"
             className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border"
           />
-          <button className="w-[334px] h-[36px] bg-[#2563EB] text-white rounded-[18px] pl-4 border">
+          {/* <Link href="/home"> */}
+          <button
+            className="w-[334px] h-[36px] bg-[#2563EB] text-white rounded-[18px] pl-4 border"
+            onClick={logIn}
+          >
             Нэвтрэх
           </button>
+          {/* </Link> */}
           <button className="text-[#71717A] border-b-2">Нууц үг мартсан</button>
           <Link href="/signup">
             <button className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border">

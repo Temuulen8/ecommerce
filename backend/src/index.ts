@@ -6,6 +6,7 @@ import authRoute from "./routes/auth-route";
 import { connectDB } from "./config/db";
 import categoryRoute from "./routes/category-route";
 import { sendEmail } from "./utils/send-email";
+import cors from "cors";
 
 const PORT = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";
@@ -14,6 +15,7 @@ const MONGO_URI = process.env.MONGO_URI || "";
 const app = express();
 
 // middlewares
+app.use(cors());
 app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/auth", categoryRoute);

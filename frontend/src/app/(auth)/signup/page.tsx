@@ -101,19 +101,18 @@ const SignUp = () => {
           <li>Тоо орсон байх</li>
           <li>Тэмдэгт орсон байх</li>
         </div>
-        {/* <Link href="/login"> */}
+
         <button
           className="btn bg-[#0166FF] text-white rounded-[20px] w-[334px] h-[36px] "
           onClick={signUp}
         >
           Үүсгэх
         </button>
-        {/* </Link> */}
-        {/* <Link href="/login"> */}
-        <button className="btn text-[#0166FF] bg-[#FFFFFF] border rounded-[20px] w-[334px] h-[36px] ">
-          Нэвтрэх
-        </button>
-        {/* </Link> */}
+        <Link href="/login">
+          <button className="btn text-[#0166FF] bg-[#FFFFFF] border rounded-[20px] w-[334px] h-[36px] ">
+            Нэвтрэх
+          </button>
+        </Link>
       </div>
     </div>
   );
