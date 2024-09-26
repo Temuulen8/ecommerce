@@ -1,9 +1,10 @@
 //MONGOOSE => ODM => object data mapping
 
 import { Request, Response } from "express";
-import User from "../models/user.model";
+
 import bcrypt from "bcrypt";
-const sql = require("../config/db");
+import User from "../models/user.model";
+import { generateToken } from "../utils/jwt";
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -18,36 +19,36 @@ export const signup = async (req: Request, res: Response) => {
       lastname,
       email,
       password,
-      phoneNumber: "",
     });
 
     console.log("create user", createdUser);
 
-    res.status(201).json({ message: "success", user: createdUser });
+    res.status(201).json({ message: "create user is successful" });
   } catch (error) {
-    res.status(500).json({ message: "server error", error: error });
+    res.status(500).json({ message: "Server error", error: error });
   }
 };
 
 export const login = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    const [user] = await sql`
-    SELECT * FROM users WHERE email=${email}
-  `;
+    if (!email || !password) {
+      return res.status(400).json({ message: "Hooson utga baij bolohgui." });
+    }
+
+    const user = await User.findOne({ email });
 
     if (!user) {
       res.status(404).json({ message: "Бүртгэлтэй хэрэглэгч олдсонгүй" });
     } else {
-      const isCheck = bcrypt.compareSync(password, user.password);
+      const isCheck = bcrypt.compareSync(password, user.password.toString());
       if (!isCheck) {
         res.status(400).json({
           message: "Хэрэглэгчийн имэйл эсвэл нууц үг тохирохгүй байна.",
         });
       } else {
-        res.status(200).json({
-          message: "success",
-        });
+        const token = generateToken({ id: user._id });
+        res.status(200).json({ message: "success", token });
       }
     }
   } catch (error) {

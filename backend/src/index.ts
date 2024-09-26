@@ -1,11 +1,11 @@
-import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 dotenv.config();
+
+import express, { Request, Response } from "express";
 import authRoute from "./routes/auth-route";
-import categoryRoute from "./routes/category-route";
 import { connectDB } from "./config/db";
-import generateHtmlTemplate from "./utils/generateHtmlTemplate";
-import nodemailer from "nodemailer";
+import categoryRoute from "./routes/category-route";
+import { sendEmail } from "./utils/send-email";
 
 const PORT = process.env.PORT || "";
 const MONGO_URI = process.env.MONGO_URI || "";
@@ -19,20 +19,11 @@ app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/auth", categoryRoute);
 
 app.get("/", async (req: Request, res: Response) => {
-  // console.log("Message sent: %s", info.messageId);
+  const rndOtp = Math.floor(Math.random() * 10000)
+    .toString()
+    .padStart(4, "0");
+  sendEmail("b.temuulen2005@gmail.com", rndOtp);
 
-  // const rndOtp = Math.floor(Math.random() * 10000)
-  //   .toString()
-  //   .padStart(4, "0");
-  // const { data, error } = await resend.emails.send({
-  //   from: "Acme <onboarding@resend.dev>",
-  //   to: ["b.temuulen2005@gmail.com"],
-  //   subject: "hello world",
-  //   html: generateHtmlTemplate(rndOtp),
-  // });
-  // if (error) {
-  //   console.error("EMAIL_ERR", { error });
-  // }
   res.send("welcome ecommerce API server");
 });
 

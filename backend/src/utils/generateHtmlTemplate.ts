@@ -1,5 +1,6 @@
-const generateHtmlTemplate = (otp: string) => {
-  return `<div style="overflow: auto;">
+export const generateHtmlTemplate = (otp: string) => {
+  return `
+    <div style="overflow: auto;">
       <div style="margin: 50px auto; width: 70%; padding: 20px 0;">
         <hr style="border: none; border-top: 1px solid #eee;" />
 
@@ -9,9 +10,7 @@ const generateHtmlTemplate = (otp: string) => {
 
         <p style="margin: 0 auto; padding: 0 10px; text-align: center;">
           Таны нэг удаагийн баталгаажуулах код:
-          ${otp}
         </p>
-        
         <h2
           style="
             background: #333;
@@ -22,7 +21,7 @@ const generateHtmlTemplate = (otp: string) => {
             border-radius: 4px;
           "
         >
-          8989
+          ${otp}
         </h2>
         <p style="margin: 0 auto; width: max-content; padding: 0 10px;">
           энэхүү код нь 5 мин хүчинтэй болно.
@@ -37,5 +36,3 @@ const generateHtmlTemplate = (otp: string) => {
       </div>
     </div>`;
 };
-
-export default generateHtmlTemplate;
