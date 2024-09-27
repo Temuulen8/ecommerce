@@ -55,3 +55,9 @@ export const login = async (req: Request, res: Response) => {
     res.status(200).json({ message: "Login success" });
   }
 };
+
+export const currentUser = async (req: Request, res: Response) => {
+  const { id } = req.user;
+  const findUser = await User.findById(id);
+  res.status(200).json({ user: findUser, message: "Success" });
+};
