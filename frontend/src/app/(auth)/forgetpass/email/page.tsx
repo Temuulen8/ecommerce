@@ -27,7 +27,7 @@ const ForgetPassword = () => {
     console.log(email);
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/auth/forgetPassword",
+        "http://localhost:8000/api/v1/auth/forget-password",
         { email }
       );
       if (res.status === 200) {
@@ -89,7 +89,7 @@ const ForgetPassword = () => {
             className="btn bg-[#0166FF] text-white rounded-[20px] w-[334px] h-[36px] "
             onClick={handleSendOtp}
           >
-            Button
+            Илгээх
           </Button>
         </>
       )}

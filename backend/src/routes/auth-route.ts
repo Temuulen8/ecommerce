@@ -5,6 +5,7 @@ import { authentication } from "../middlewares/authentication";
 const router = Router();
 
 router.route("/current-user").post(authentication, currentUser);
+router.route("/forget-password").post();
 router.route("/signup").post(signup);
 router.route("/login").post(login);
 
