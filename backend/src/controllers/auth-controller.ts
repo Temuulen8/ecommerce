@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import User from "../models/user.model";
 import { generateToken } from "../utils/jwt";
 import { sendEmail } from "../utils/send-email";
+import crypto from "crypto";
 
 export const signup = async (req: Request, res: Response) => {
   try {
@@ -31,6 +32,7 @@ export const signup = async (req: Request, res: Response) => {
 };
 
 export const login = async (req: Request, res: Response) => {
+  console.log("ehlel");
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -55,6 +57,7 @@ export const login = async (req: Request, res: Response) => {
   } catch (error) {
     res.status(200).json({ message: "Login success" });
   }
+  console.log("togsgol");
 };
 
 export const currentUser = async (req: Request, res: Response) => {
@@ -81,4 +84,55 @@ export const forgetPassword = async (req: Request, res: Response) => {
     await sendEmail(email, otp);
     res.status(200).json({ message: "OTP code is sent email successfully" });
   } catch (error) {}
+};
+
+export const verifyOtp = async (req: Request, res: Response) => {
+  const { email, otpValue } = req.body;
+
+  const findUser = await User.findOne({ email: email, otp: otpValue });
+  if (!findUser) {
+    return res
+      .status(400)
+      .json({ message: "Бүртгэлтэй хэрэглэгч эсвэл OTP код олдсонгүй" });
+  }
+
+  //sendEmail
+  const resetToken = crypto.randomBytes(25).toString("hex");
+  const hashedResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+  findUser.passwordResetToken = hashedResetToken;
+  findUser.passwordResetTokenExpire = new Date(Date.now() + 10 * 60 * 1000);
+  await findUser.save();
+
+  await sendEmail(
+    email,
+    `<a href="http://localhost:3000/forgetpass/newpass?resettoken="${resetToken}"">Нууц үг сэргээх холбоос</a>`
+  );
+  res.status(200).json({ message: "Нууц үг сэргээх имэйл илгээлээ" });
+};
+
+export const verifyPassword = async (req: Request, res: Response) => {
+  const { password, resetToken } = req.body;
+
+  const hashedResetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  const findUser = await User.findOne({
+    passwordResetToken: hashedResetToken,
+    passwordResetTokenExpire: { $gt: Date.now },
+  });
+
+  if (!findUser) {
+    return res
+      .status(400)
+      .json({ message: "Таны нууц үг сэргээх хугацаа дууссан байна:" });
+  }
+
+  findUser.password = password;
+  await findUser.save();
+  res.status(200).json({ message: "Нууц үг  амжилттэй сэргээлээ" });
 };

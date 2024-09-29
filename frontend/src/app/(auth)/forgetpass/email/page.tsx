@@ -42,7 +42,6 @@ const ForgetPassword = () => {
   const handleConfirmOtp = async (value: string) => {
     setOtpValue(value);
     if (value.length === 4) {
-      // router.push("/forgetpass/newpass");
       try {
         const res = await axios.post(
           "http://localhost:8000/api/v1/auth/verify-otp",
@@ -57,6 +56,7 @@ const ForgetPassword = () => {
       } catch (error) {
         toast.error("Имэйл илгээхэд алдаа гарлаа");
       }
+      // router.push("/forgetpass/newpass");
     }
   };
 
