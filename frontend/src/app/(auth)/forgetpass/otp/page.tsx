@@ -12,7 +12,7 @@ import {
 
 const Otp = () => {
   const router = useRouter();
-  const [countDown, setCountDown] = useState(30);
+  const [countDown, setCountDown] = useState(60);
   const [otpValue, setOtpValue] = useState("");
 
   useEffect(() => {

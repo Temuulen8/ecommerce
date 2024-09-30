@@ -14,7 +14,6 @@ const LogIn = () => {
   });
 
   const logIn = async () => {
-    console.log("one");
     // ES5
     // const email = userData.email;
     // const password = userData.password
@@ -29,7 +28,7 @@ const LogIn = () => {
           password,
         }
       );
-
+      console.log("one");
       if (response.status === 200) {
         toast.success("User successfully signed in", { autoClose: 1000 });
         const { token } = response.data;
@@ -54,21 +53,31 @@ const LogIn = () => {
             type="text"
             placeholder="Имэйл хаяг"
             className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border"
+            value={userData.email}
+            onChange={(e) =>
+              setUserData({ ...userData, email: e.target.value })
+            }
           />
           <input
             type="password"
             placeholder="Нууц үг"
             className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border"
+            value={userData.password}
+            onChange={(e) =>
+              setUserData({ ...userData, password: e.target.value })
+            }
           />
-          {/* <Link href="/home"> */}
           <button
             className="w-[334px] h-[36px] bg-[#2563EB] text-white rounded-[18px] pl-4 border"
             onClick={logIn}
           >
             Нэвтрэх
           </button>
-          {/* </Link> */}
-          <button className="text-[#71717A] border-b-2">Нууц үг мартсан</button>
+          <Link href="/forgetpass/email">
+            <button className="text-[#71717A] border-b-2">
+              Нууц үг мартсан
+            </button>
+          </Link>
           <Link href="/signup">
             <button className="w-[334px] h-[36px] bg-[#FFFFFF] rounded-[18px] pl-4 border">
               Бүртгүүлэх

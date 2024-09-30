@@ -32,7 +32,6 @@ const SignUp = () => {
         lastname,
         email,
         password,
-        repassword,
       });
 
       if (res.status === 201) {

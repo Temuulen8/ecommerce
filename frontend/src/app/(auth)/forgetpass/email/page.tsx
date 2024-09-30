@@ -17,7 +17,7 @@ const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [step, setStep] = useState(1);
   const [otpValue, setOtpValue] = useState("");
-  const [countDown, setCountDown] = useState(30);
+  const [countDown, setCountDown] = useState(60);
 
   const handleEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -42,10 +42,11 @@ const ForgetPassword = () => {
   const handleConfirmOtp = async (value: string) => {
     setOtpValue(value);
     if (value.length === 4) {
+      // router.push("/forgetpass/newpass");
       try {
         const res = await axios.post(
           "http://localhost:8000/api/v1/auth/verify-otp",
-          { email, otpValue }
+          { email, otpValue: value }
         );
         if (res.status === 200) {
           toast.success(
@@ -54,9 +55,9 @@ const ForgetPassword = () => {
           router.push("/login");
         }
       } catch (error) {
+        console.log(error);
         toast.error("Имэйл илгээхэд алдаа гарлаа");
       }
-      // router.push("/forgetpass/newpass");
     }
   };
 
@@ -111,8 +112,6 @@ const ForgetPassword = () => {
           >
             Дахин илгээх ({countDown})
           </button>
-
-          <Button>next</Button>
         </div>
       )}
     </div>

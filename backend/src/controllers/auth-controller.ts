@@ -88,7 +88,7 @@ export const forgetPassword = async (req: Request, res: Response) => {
 
 export const verifyOtp = async (req: Request, res: Response) => {
   const { email, otpValue } = req.body;
-
+  console.log("email, otpValue", email, otpValue);
   const findUser = await User.findOne({ email: email, otp: otpValue });
   if (!findUser) {
     return res
@@ -106,9 +106,10 @@ export const verifyOtp = async (req: Request, res: Response) => {
   findUser.passwordResetTokenExpire = new Date(Date.now() + 10 * 60 * 1000);
   await findUser.save();
 
+  console.log("RT", resetToken);
   await sendEmail(
     email,
-    `<a href="http://localhost:3000/forgetpass/newpass?resettoken="${resetToken}"">Нууц үг сэргээх холбоос</a>`
+    `<a href="http://localhost:3000/forgetpass/newpass?resettoken=${resetToken}"&email=${email}>Нууц үг сэргээх холбоос</a>`
   );
   res.status(200).json({ message: "Нууц үг сэргээх имэйл илгээлээ" });
 };
