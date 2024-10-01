@@ -115,25 +115,39 @@ export const verifyOtp = async (req: Request, res: Response) => {
 };
 
 export const verifyPassword = async (req: Request, res: Response) => {
-  const { password, resetToken } = req.body;
+  try {
+    const { password, resetToken } = req.body;
 
-  const hashedResetToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
+    const hashedResetToken = crypto
+      .createHash("sha256")
+      .update(resetToken)
+      .digest("hex");
 
-  const findUser = await User.findOne({
-    passwordResetToken: hashedResetToken,
-    passwordResetTokenExpire: { $gt: Date.now },
-  });
+    const findUser = await User.findOne({
+      passwordResetToken: hashedResetToken,
+      passwordResetTokenExpire: { $gt: Date.now() },
+    });
 
-  if (!findUser) {
-    return res
-      .status(400)
-      .json({ message: "Таны нууц үг сэргээх хугацаа дууссан байна:" });
+    if (!findUser) {
+      return res
+        .status(400)
+        .json({ message: "Таны нууц үг сэргээх хугацаа дууссан байна:" });
+    }
+
+    findUser.password = password;
+    await findUser?.save();
+    res.status(200).json({ message: "Нууц үг  амжилттэй сэргээлээ" });
+  } catch (error) {
+    console.log(error);
+    res.status(401).json({ message: error });
   }
+};
 
-  findUser.password = password;
-  await findUser.save();
-  res.status(200).json({ message: "Нууц үг  амжилттэй сэргээлээ" });
+export const updateUser = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+  res.status(200).json({
+    message: "Хэрэглэгчийн мэдээлэл амжилттай шинэчлэгдлээ.",
+    updatedUser,
+  });
 };

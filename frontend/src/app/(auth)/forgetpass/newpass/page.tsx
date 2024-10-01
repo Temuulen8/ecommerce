@@ -1,26 +1,45 @@
+"use client";
+
 import React, { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { useRouter, useSearchParams } from "next/navigation";
+import axios from "axios";
+import { apiUrl } from "@/utils/apiUrl";
 import { Button } from "@/components/ui/button";
-import { useSearchParams } from "next/navigation";
-import { toast } from "react-toastify";
-// import { useRouter } from "next/navigation";
 
 const NewPass = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const [password, setPassword] = useState("");
+  const { toast } = useToast();
   const [repassword, setRePassword] = useState("");
   const params = useSearchParams();
 
-  const handleNewPassword = () => {
+  const handleNewPassword = async () => {
     if (!(password === repassword)) {
       console.log("Clicked not match");
-      toast.error("error");
-      // toast.success("succe");
+      toast({
+        title: "Алдаа",
+        description: "Нууц үг хоорондоо таарахгүй байна",
+      });
       return;
     }
-    console.log("RT", params.get("resettoken"));
-    console.log("EMAIL", params.get("email"));
-    // router.push("/login");
+    // http://localhost:3000/forgetpass/newpass?resettoken=241df0d7a891f5b6e3f1b5f1cc32ae6e7c5a992f75d35ed199
+    try {
+      const res = await axios.post(
+        `http://localhost:8000/api/v1/auth/verify-password`,
+        {
+          password: password,
+          resetToken: params.get("resettoken"),
+        }
+      );
+      if (res.status === 200) {
+        router.push("/login");
+      }
+    } catch (error) {
+      console.log("first", error);
+    }
   };
+
   return (
     <div className="flex flex-col items-center  bg-gray-100">
       <div className=" flex flex-col h-screen gap-10 justify-center">

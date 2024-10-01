@@ -36,6 +36,7 @@ const ForgetPassword = () => {
     } catch (error) {
       toast.error("Имэйл илгээхэд алдаа гарлаа");
     }
+
     // router.push("/forgetpass/otp");
   };
 

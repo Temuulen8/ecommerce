@@ -4,6 +4,7 @@ import {
   forgetPassword,
   login,
   signup,
+  updateUser,
   verifyOtp,
   verifyPassword,
 } from "../controllers/auth-controller";
@@ -17,5 +18,6 @@ router.route("/forget-password").post(forgetPassword);
 router.route("/verify-otp").post(verifyOtp);
 router.route("/signup").post(signup);
 router.route("/login").post(login);
+router.route("/user/:id").post(updateUser);
 
 export default router;

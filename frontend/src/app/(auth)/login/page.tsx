@@ -21,6 +21,8 @@ const LogIn = () => {
     const { email, password } = userData;
 
     try {
+      console.log("one");
+
       const response = await axios.post(
         `http://localhost:8000/api/v1/auth/login`,
         {
@@ -28,7 +30,6 @@ const LogIn = () => {
           password,
         }
       );
-      console.log("one");
       if (response.status === 200) {
         toast.success("User successfully signed in", { autoClose: 1000 });
         const { token } = response.data;
