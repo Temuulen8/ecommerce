@@ -1,10 +1,16 @@
+"use client";
+
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { CiSearch } from "react-icons/ci";
+import { useUser } from "@/provider/user-provider";
+
 const Header = () => {
+  const { user } = useUser();
+  console.log("user", user);
   return (
     <div className="bg-black h-[68px] w-full flex justify-between px-12">
       <div className="flex items-center gap-8">

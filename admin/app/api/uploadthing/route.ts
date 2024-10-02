@@ -1,4 +1,4 @@
-import { createNextRouteHandler } from 'uploadthing/next';
+import { createNextRouteHandler } from 'uploadthing/Next';
 
 import { ourFileRouter } from './core';
 
