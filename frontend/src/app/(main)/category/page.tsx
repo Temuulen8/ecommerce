@@ -4,7 +4,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 const Category = () => {
   return (
-    <div className="flex">
+    <div className="flex justify-between px-96">
       <div>
         <div>
           <h3>Ангилал</h3>
@@ -132,7 +132,7 @@ const Category = () => {
       </div>
       <div>
         <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-5 gap-5">
+          <div className="grid items-center grid-cols-4 gap-5">
             <div>
               <Card
                 img="./image.png"
@@ -160,7 +160,7 @@ const Category = () => {
           </div>
         </div>
         <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-5 gap-5">
+          <div className="grid items-center grid-cols-4 gap-5">
             <div>
               <Card
                 img="./image.png"
@@ -188,7 +188,7 @@ const Category = () => {
           </div>
         </div>
         <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-5 gap-5">
+          <div className="grid items-center grid-cols-4 gap-5">
             <div>
               <Card
                 img="./image.png"
@@ -216,7 +216,7 @@ const Category = () => {
           </div>
         </div>
         <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-5 gap-5">
+          <div className="grid items-center grid-cols-4 gap-5">
             <div>
               <Card
                 img="./image.png"
@@ -244,7 +244,7 @@ const Category = () => {
           </div>
         </div>
         <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-5 gap-5">
+          <div className="grid items-center grid-cols-4 gap-5">
             <div>
               <Card
                 img="./image.png"
@@ -272,7 +272,7 @@ const Category = () => {
           </div>
         </div>
         <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-5 gap-5">
+          <div className="grid items-center grid-cols-4 gap-5">
             <div>
               <Card
                 img="./image.png"

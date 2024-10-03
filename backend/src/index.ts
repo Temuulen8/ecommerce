@@ -5,6 +5,7 @@ import express, { Request, Response } from "express";
 import authRoute from "./routes/auth-route";
 import { connectDB } from "./config/db";
 import categoryRoute from "./routes/category-route";
+import productRoute from "./routes/product-route";
 import { sendEmail } from "./utils/send-email";
 import cors from "cors";
 
@@ -18,7 +19,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/auth", categoryRoute);
+app.use("/api/v1/category", categoryRoute);
+app.use("/api/v1/product", productRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   const rndOtp = Math.floor(Math.random() * 10000)
