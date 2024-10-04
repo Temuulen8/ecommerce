@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import Category from "../models/product.model";
 import Product from "../models/product.model";
 
 export const getAllProduct = async (req: Request, res: Response) => {
@@ -10,6 +9,7 @@ export const getAllProduct = async (req: Request, res: Response) => {
     res.status(400).json({ message: "failed to get all product", error });
   }
 };
+
 export const getProduct = async (req: Request, res: Response) => {
   const { productId } = req.params;
   console.log("productId", productId);
