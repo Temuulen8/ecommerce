@@ -1,7 +1,7 @@
 import Card from "@/components/card";
 import React from "react";
 
-export const Home = () => {
+ const Home = () => {
   return (
     <div>
       <div className="flex flex-col justify-end h-[446px] bg-slate-300 ">
