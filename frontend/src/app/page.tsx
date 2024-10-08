@@ -1,13 +1,10 @@
 "use client";
 
-import Header from "@/components/header/header";
-import Footer from "@/components/footer/footer";
-import LogIn from "./(auth)/login/page";
-import ForgetPassword from "./(auth)/forgetpass/email/page";
 import axios from "axios";
 import { apiUrl } from "@/utils/apiUrl";
 import { useEffect, useState } from "react";
 import Card from "@/components/card";
+import { useRouter } from "next/navigation";
 
 export interface IProduct {
   category: object;
@@ -25,6 +22,8 @@ export interface IProduct {
 }
 
 export default function Home() {
+  const router = useRouter();
+
   const [productsData, setProductsData] = useState<IProduct[]>([]);
   const fetchProductData = async () => {
     try {
@@ -37,16 +36,30 @@ export default function Home() {
     fetchProductData();
   }, []);
   console.log("data", productsData);
+
+  const productDetail = () => {
+    try {
+    } catch (error) {}
+  };
+
   return (
-    <div className="grid grid-cols-4">
-      <div>
-        {productsData.map((product) => (
-          <Card
-            img={product.images[0]}
-            title={product.name}
-            price={product.price}
-          />
-        ))}
+    <div>
+      <div className="flex flex-col justify-end h-[446px] bg-slate-300 ">
+        <div className="pl-[20%] pb-[30px]">
+          <p className="text-lg">Wildflower Hoodie</p>
+          <p className="font-bold text-4xl">120’000₮</p>
+        </div>
+      </div>
+      <div className="flex justify-center ">
+        <div className="grid grid-cols-5 pt-5 gap-5">
+          {productsData.map((product) => (
+            <Card
+              img={product.images[0]}
+              title={product.name}
+              price={product.price}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
