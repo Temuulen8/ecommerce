@@ -35,7 +35,7 @@ const LogIn = () => {
         const { token } = response.data;
         localStorage.setItem("token", token);
 
-        router.push("/home");
+        router.push("/");
       }
     } catch (error) {
       console.error("There was an error signing in:", error);

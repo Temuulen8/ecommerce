@@ -1,13 +1,45 @@
+"use client";
+
 import Card from "@/components/card";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import axios from "axios";
+import { apiUrl } from "@/utils/apiUrl";
+import Link from "next/link";
+
+export interface IProduct {
+  category: object;
+  createdAt: string;
+  description: string;
+  discount: number;
+  images: string[];
+  isNew: boolean;
+  name: string;
+  price: number;
+  quantity: number;
+  size: string;
+  updatedAt: string;
+  _id: string;
+}
 
 const Category = () => {
+  const [productsData, setProductsData] = useState<IProduct[]>([]);
+  const fetchProductData = async () => {
+    try {
+      const { data } = await axios.get(`${apiUrl}/api/v1/product`);
+      setProductsData(data);
+      console.log("all products", data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchProductData();
+  }, []);
+
   return (
-    <div className="flex justify-between px-96">
-      <div>
-        <div>
-          <h3>Ангилал</h3>
+    <div className="flex justify-between px-96 pb-[92px]">
+      <div className="flex flex-col gap-12">
+        <div className="flex flex-col gap-4">
+          <h3 className="pt-5 font-bold"> Ангилал</h3>
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" />
             <label
@@ -63,8 +95,8 @@ const Category = () => {
             </label>
           </div>
         </div>
-        <div>
-          <h3>Хэмжээ</h3>
+        <div className="flex flex-col gap-4">
+          <h3 className="font-bold">Хэмжээ</h3>
           <div className="flex items-center space-x-2">
             <Checkbox id="terms" />
             <label
@@ -116,7 +148,7 @@ const Category = () => {
               htmlFor="terms"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              XXL
+              2XL
             </label>
           </div>
           <div className="flex items-center space-x-2">
@@ -125,179 +157,22 @@ const Category = () => {
               htmlFor="terms"
               className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              XXXL
+              3XL
             </label>
           </div>
         </div>
       </div>
-      <div>
-        <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-4 gap-5">
-            <div>
+      <div className="flex justify-center ">
+        <div className="grid grid-cols-4 pt-5 gap-5">
+          {productsData.map((product) => (
+            <Link href={`/detail/${product._id}`}>
               <Card
-                img="./image.png"
-                title="The Prompt Magazine"
-                price={120000}
+                img={product.images[0]}
+                title={product.name}
+                price={product.price}
               />
-            </div>
-            <div>
-              <Card img="./guy.png" title="Chunky Glyph Tee" price={120000} />
-            </div>
-            <div>
-              <Card
-                img="./bottle.png"
-                title="All Smiles Nalgene"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card
-                img="./woman.png"
-                title="Wildflower Hoodie"
-                price={120000}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-4 gap-5">
-            <div>
-              <Card
-                img="./image.png"
-                title="The Prompt Magazine"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card img="./guy.png" title="Chunky Glyph Tee" price={120000} />
-            </div>
-            <div>
-              <Card
-                img="./bottle.png"
-                title="All Smiles Nalgene"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card
-                img="./woman.png"
-                title="Wildflower Hoodie"
-                price={120000}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-4 gap-5">
-            <div>
-              <Card
-                img="./image.png"
-                title="The Prompt Magazine"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card img="./guy.png" title="Chunky Glyph Tee" price={120000} />
-            </div>
-            <div>
-              <Card
-                img="./bottle.png"
-                title="All Smiles Nalgene"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card
-                img="./woman.png"
-                title="Wildflower Hoodie"
-                price={120000}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-4 gap-5">
-            <div>
-              <Card
-                img="./image.png"
-                title="The Prompt Magazine"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card img="./guy.png" title="Chunky Glyph Tee" price={120000} />
-            </div>
-            <div>
-              <Card
-                img="./bottle.png"
-                title="All Smiles Nalgene"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card
-                img="./woman.png"
-                title="Wildflower Hoodie"
-                price={120000}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-4 gap-5">
-            <div>
-              <Card
-                img="./image.png"
-                title="The Prompt Magazine"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card img="./guy.png" title="Chunky Glyph Tee" price={120000} />
-            </div>
-            <div>
-              <Card
-                img="./bottle.png"
-                title="All Smiles Nalgene"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card
-                img="./woman.png"
-                title="Wildflower Hoodie"
-                price={120000}
-              />
-            </div>
-          </div>
-        </div>
-        <div className="py-[20px] flex justify-center gap-5">
-          <div className="grid items-center grid-cols-4 gap-5">
-            <div>
-              <Card
-                img="./image.png"
-                title="The Prompt Magazine"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card img="./guy.png" title="Chunky Glyph Tee" price={120000} />
-            </div>
-            <div>
-              <Card
-                img="./bottle.png"
-                title="All Smiles Nalgene"
-                price={120000}
-              />
-            </div>
-            <div>
-              <Card
-                img="./woman.png"
-                title="Wildflower Hoodie"
-                price={120000}
-              />
-            </div>
-          </div>
+            </Link>
+          ))}
         </div>
       </div>
     </div>

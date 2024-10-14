@@ -7,6 +7,7 @@ import { LuShoppingCart } from "react-icons/lu";
 import { Button } from "@/components/ui/button";
 import { CiSearch } from "react-icons/ci";
 import { useUser } from "@/provider/user-provider";
+import Link from "next/link";
 
 const Header = () => {
   const { user } = useUser();
@@ -15,9 +16,13 @@ const Header = () => {
     <div className="bg-black h-[68px] w-full flex justify-between px-12">
       <div className="flex items-center gap-8">
         <div>
-          <img src="./Logo.png" alt="" />
+          <Link href={"/"}>
+            <img src="./Logo.png" alt="" />
+          </Link>
         </div>
-        <div className="text-white">Ангилал</div>
+        <Link href={"/category"}>
+          <div className="text-white">Ангилал</div>
+        </Link>
       </div>
       <div className="flex items-center">
         <div className="flex items-center  bg-[#18181B] rounded-[20px] h-10 border pl-3">
@@ -34,11 +39,17 @@ const Header = () => {
           <FaRegHeart className="text-white w-6 h-6" />
         </div>
         <div>
-          <LuShoppingCart className="text-white w-6 h-6" />
+          <Link href={"/cart"}>
+            <LuShoppingCart className="text-white w-6 h-6" />
+          </Link>
         </div>
         <div className="flex gap-4">
-          <Button className="border rounded-[18px]">Бүртгүүлэх</Button>
-          <Button className="bg-[#2563EB] rounded-[18px]">Нэвтрэх</Button>
+          <Link href={"/signup"}>
+            <Button className="border rounded-[18px]">Бүртгүүлэх</Button>
+          </Link>
+          <Link href={"/login"}>
+            <Button className="bg-[#2563EB] rounded-[18px]">Нэвтрэх</Button>
+          </Link>
         </div>
       </div>
     </div>

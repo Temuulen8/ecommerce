@@ -5,6 +5,7 @@ import { apiUrl } from "@/utils/apiUrl";
 import { useEffect, useState } from "react";
 import Card from "@/components/card";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export interface IProduct {
   category: object;
@@ -37,13 +38,8 @@ export default function Home() {
   }, []);
   console.log("data", productsData);
 
-  const productDetail = () => {
-    try {
-    } catch (error) {}
-  };
-
   return (
-    <div>
+    <div className="pb-[92px]">
       <div className="flex flex-col justify-end h-[446px] bg-slate-300 ">
         <div className="pl-[20%] pb-[30px]">
           <p className="text-lg">Wildflower Hoodie</p>
@@ -53,11 +49,13 @@ export default function Home() {
       <div className="flex justify-center ">
         <div className="grid grid-cols-5 pt-5 gap-5">
           {productsData.map((product) => (
-            <Card
-              img={product.images[0]}
-              title={product.name}
-              price={product.price}
-            />
+            <Link href={`/detail/${product._id}`}>
+              <Card
+                img={product.images[0]}
+                title={product.name}
+                price={product.price}
+              />
+            </Link>
           ))}
         </div>
       </div>
