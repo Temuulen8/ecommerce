@@ -152,7 +152,7 @@ const Detail: NextPage<any> = ({ params }) => {
                     </div>
                   ) : (
                     <div>
-                      <div className=" relative  h-[331px] w-full rounded-2xl overflow-hidden">
+                      <div className=" relative w-full rounded-2xl overflow-hidden">
                         <img
                           src={product.images[0]}
                           alt=""

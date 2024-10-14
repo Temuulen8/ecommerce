@@ -40,8 +40,9 @@ export default function Home() {
 
   return (
     <div className="pb-[92px]">
-      <div className="flex flex-col justify-end h-[446px] bg-slate-300 ">
-        <div className="pl-[20%] pb-[30px]">
+      <div className="flex flex-col justify-end  ">
+        <img src="./Hero.png" alt="" className="relative h-[446px]" />
+        <div className="pl-[20%] pb-[30px] absolute">
           <p className="text-lg">Wildflower Hoodie</p>
           <p className="font-bold text-4xl">120’000₮</p>
         </div>
