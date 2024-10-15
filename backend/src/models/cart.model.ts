@@ -5,6 +5,7 @@ interface ICart {
   products: [{ product: Schema.Types.ObjectId; quantity: Number }];
   totalAmount: Number;
 }
+
 const cartSchema = new Schema<ICart>(
   {
     user: {
@@ -34,5 +35,7 @@ const cartSchema = new Schema<ICart>(
     timestamps: true,
   }
 );
+
 const Cart = model<ICart>("Cart", cartSchema);
+
 export default Cart;
