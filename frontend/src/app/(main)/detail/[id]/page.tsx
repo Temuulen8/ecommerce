@@ -8,6 +8,9 @@ import { apiUrl } from "@/utils/apiUrl";
 import { NextPage } from "next";
 import Link from "next/link";
 import { Heart } from "lucide-react";
+import { useUser } from "@/provider/user-provider";
+import { toast } from "react-toastify";
+import { useParams } from "next/navigation";
 
 interface IData {
   name: string;
@@ -25,8 +28,11 @@ interface IData {
 }
 
 const Detail: NextPage<any> = ({ params }) => {
+  const { user } = useUser;
+  const { id } = useParams();
   const [proData, setProData] = useState<IData>({} as IData);
   const [products, setProducts] = useState<IData[]>([]);
+  const [productQuantity, setProductQuantity] = useState(0);
 
   const fetchProduct = async () => {
     try {
@@ -48,6 +54,23 @@ const Detail: NextPage<any> = ({ params }) => {
       setProducts(data);
     } catch (error) {}
   };
+
+  const addToCart = async () => {
+    try {
+      const response = await axios.post(`${apiUrl}/carts/create-cart`, {
+        userId: user?._id,
+        productId: id,
+        quantity: productQuantity,
+      });
+      if (response.status === 200) {
+        toast.success("Successfully added to cart");
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast.error("Failed to add to cart");
+    }
+  };
+
   console.log("a", products);
 
   useEffect(() => {
@@ -111,17 +134,26 @@ const Detail: NextPage<any> = ({ params }) => {
             </p>
           </div>
           <div className="flex items-center gap-6">
-            <button className="border border-black w-[32px] h-[32px] flex justify-center items-center rounded-full text-xs">
+            <button
+              className="border border-black w-[32px] h-[32px] flex justify-center items-center rounded-full text-xs"
+              onClick={() => setProductQuantity(productQuantity - 1)}
+            >
               -
             </button>
-            <div>1</div>
-            <button className="border border-black w-[32px] h-[32px] flex justify-center items-center rounded-full text-xs">
+            <div>{productQuantity}</div>
+            <button
+              className="border border-black w-[32px] h-[32px] flex justify-center items-center rounded-full text-xs"
+              onClick={() => setProductQuantity(productQuantity + 1)}
+            >
               +
             </button>
           </div>
           <div className="font-bold text-xl">{proData.price}₮</div>
           <div>
-            <Button className="bg-[#2563EB] rounded-[20px] w-[175px] font-medium text-sm">
+            <Button
+              className="bg-[#2563EB] rounded-[20px] w-[175px] font-medium text-sm"
+              onClick={addToCart}
+            >
               Сагсанд нэмэх
             </Button>
           </div>
