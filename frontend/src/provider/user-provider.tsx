@@ -3,21 +3,21 @@
 import { apiUrl } from "@/utils/apiUrl";
 import axios from "axios";
 import React, { useContext, useState, createContext, useEffect } from "react";
-import { toast } from "sonner";
+import { toast } from "react-toastify";
 
 interface IUser {
   _id: string;
   email: string;
 }
 
-interface IUserContext {
+interface IContext {
   user: IUser | null;
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
   loading: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const UserContext = createContext<IUserContext>({
+export const UserContext = createContext<IContext>({
   user: null,
   setUser: () => {},
   loading: true,
@@ -33,7 +33,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const userToken = localStorage.getItem("token");
       if (userToken) {
-        const response = await axios.get(`${apiUrl}/auth/current-user`, {
+        const response = await axios.get(`${apiUrl}/api/v1/auth/current-user`, {
           headers: { Authorization: `Bearer ${userToken}` },
         });
         if (response.status === 200) {

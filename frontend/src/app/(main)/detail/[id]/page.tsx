@@ -57,7 +57,7 @@ const Detail: NextPage<any> = ({ params }) => {
 
   const addToCart = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/carts/create-cart`, {
+      const response = await axios.post(`${apiUrl}/api/v1/carts/create-cart`, {
         userId: user?._id,
         productId: id,
         quantity: productQuantity,
@@ -71,8 +71,6 @@ const Detail: NextPage<any> = ({ params }) => {
     }
   };
 
-  // console.log("a", products);
-
   useEffect(() => {
     fetchProduct();
   }, []);
@@ -80,12 +78,6 @@ const Detail: NextPage<any> = ({ params }) => {
   useEffect(() => {
     relProduct();
   }, [proData]);
-
-  // console.log("product", proData);
-
-  // console.log("productQuantity", productQuantity);
-
-  console.log("user", user);
 
   return (
     <div className="flex flex-col gap-[80px] items-center py-14">

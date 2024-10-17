@@ -10,8 +10,6 @@ import { useUser } from "@/provider/user-provider";
 import Link from "next/link";
 
 const Header = () => {
-  const { user } = useUser();
-  console.log("user", user);
   return (
     <div className="bg-black h-[68px] w-full flex justify-between px-12">
       <div className="flex items-center gap-8">
