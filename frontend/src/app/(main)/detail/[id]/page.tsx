@@ -28,7 +28,7 @@ interface IData {
 }
 
 const Detail: NextPage<any> = ({ params }) => {
-  const { user } = useUser;
+  const { user } = useUser();
   const { id } = useParams();
   const [proData, setProData] = useState<IData>({} as IData);
   const [products, setProducts] = useState<IData[]>([]);
@@ -84,6 +84,8 @@ const Detail: NextPage<any> = ({ params }) => {
   // console.log("product", proData);
 
   // console.log("productQuantity", productQuantity);
+
+  console.log("user", user);
 
   return (
     <div className="flex flex-col gap-[80px] items-center py-14">
