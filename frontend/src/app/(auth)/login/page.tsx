@@ -21,8 +21,6 @@ const LogIn = () => {
     const { email, password } = userData;
 
     try {
-      console.log("one");
-
       const response = await axios.post(
         `http://localhost:8000/api/v1/auth/login`,
         {
@@ -41,7 +39,6 @@ const LogIn = () => {
       console.error("There was an error signing in:", error);
       toast.error("Failed to sign in. Please try again.");
     }
-    console.log("two");
   };
   return (
     <div className="">
