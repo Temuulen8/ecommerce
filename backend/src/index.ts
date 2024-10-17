@@ -6,6 +6,7 @@ import authRoute from "./routes/auth-route";
 import { connectDB } from "./config/db";
 import categoryRoute from "./routes/category-route";
 import productRoute from "./routes/product-route";
+import cartRoute from "./routes/cart-route";
 import { sendEmail } from "./utils/send-email";
 import cors from "cors";
 
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/category", categoryRoute);
 app.use("/api/v1/product", productRoute);
+app.use("/api/v1/carts", cartRoute);
 
 app.get("/", async (req: Request, res: Response) => {
   const rndOtp = Math.floor(Math.random() * 10000)

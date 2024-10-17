@@ -71,7 +71,7 @@ const Detail: NextPage<any> = ({ params }) => {
     }
   };
 
-  console.log("a", products);
+  // console.log("a", products);
 
   useEffect(() => {
     fetchProduct();
@@ -81,7 +81,10 @@ const Detail: NextPage<any> = ({ params }) => {
     relProduct();
   }, [proData]);
 
-  console.log("product", proData);
+  // console.log("product", proData);
+
+  // console.log("productQuantity", productQuantity);
+
   return (
     <div className="flex flex-col gap-[80px] items-center py-14">
       <div className="flex gap-5">
