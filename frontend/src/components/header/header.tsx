@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { FaRegHeart } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
@@ -10,6 +10,8 @@ import { useUser } from "@/provider/user-provider";
 import Link from "next/link";
 
 const Header = () => {
+  const [search, setSearch] = useState("");
+
   return (
     <div className="bg-black h-[68px] w-full flex justify-between px-12">
       <div className="flex items-center gap-8">
@@ -29,6 +31,7 @@ const Header = () => {
             type="email"
             placeholder="Бүтээгдэхүүн хайх"
             className="  border-none text-white"
+            onChange={(e) => setSearch(e.target.value)}
           />
         </div>
       </div>

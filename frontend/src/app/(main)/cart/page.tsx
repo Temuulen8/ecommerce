@@ -24,7 +24,6 @@ const Cart = () => {
       });
       if (response.status === 200) {
         setCartData(response.data.cart.products);
-        console.log(response.data.cart.products);
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -72,7 +71,7 @@ const Cart = () => {
         {cartData.map((cartProduct) => {
           const { product } = cartProduct;
           return (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4" key={product._id}>
               <div className="flex justify-center items-center gap-6 border w-[520px]  h-[132px] rounded-2xl">
                 <div className="w-[100px] h-[100px] rounded-2xl overflow-clip">
                   <img src={product.images[0]} />
