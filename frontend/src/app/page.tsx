@@ -4,7 +4,6 @@ import axios from "axios";
 import { apiUrl } from "@/utils/apiUrl";
 import { useEffect, useState } from "react";
 import Card from "@/components/card";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export interface IProduct {
@@ -23,8 +22,6 @@ export interface IProduct {
 }
 
 export default function Home() {
-  const router = useRouter();
-
   const [productsData, setProductsData] = useState<IProduct[]>([]);
   const fetchProductData = async () => {
     try {
@@ -50,7 +47,7 @@ export default function Home() {
       <div className="flex justify-center ">
         <div className="grid grid-cols-5 pt-5 gap-5">
           {productsData.map((product) => (
-            <Link href={`/detail/${product._id}`}>
+            <Link href={`/detail/${product._id}`} key={product._id}>
               <Card
                 img={product.images[0]}
                 title={product.name}
