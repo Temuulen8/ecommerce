@@ -165,7 +165,7 @@ const Category = () => {
       <div className="flex justify-center ">
         <div className="grid grid-cols-4 pt-5 gap-5">
           {productsData.map((product) => (
-            <Link href={`/detail/${product._id}`}>
+            <Link href={`/detail/${product._id}`} key={product._id}>
               <Card
                 img={product.images[0]}
                 title={product.name}

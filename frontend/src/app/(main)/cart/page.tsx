@@ -9,7 +9,6 @@ import { CiTrash } from "react-icons/ci";
 import { toast } from "react-toastify";
 
 const Cart = () => {
-  const [count, setCount] = useState(0);
   const [cartData, setCartData] = useState<CartType>([
     {
       product: { _id: "", name: "", price: 0, images: [""], discount: 0 },

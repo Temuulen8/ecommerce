@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
-import { apiUrl } from "@/utils/apiUrl";
 import { Button } from "@/components/ui/button";
 
 const NewPass = () => {
