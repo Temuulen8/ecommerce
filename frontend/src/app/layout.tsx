@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import UserProvider from "@/provider/user-provider";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
